@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="my_patients_form_view" model="ir.ui.view">
+            <field name="name">my.patients.form.view</field>
+            <field name="model">my.patients</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="benhnhan_id"/>
+                            <h3><field name="benhnhan_id"/></h3>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="bn_image" string="Ảnh thẻ" widget="image"/>
+                            </group>
+                            <group>
+                                <field name="ten"/>
+                                <field name="tuoi"/>
+                                <field name="gioitinh"/>
+                                <field name="ngaysinh"/>
+                                <field name="nghenghiep"/>
+                                <field name="diachi"/>
+                                <field name="sdthoai"/>
+                                <field name="sotheBHYT"/>
+                                <field name="cmnd"/>
+                                <field name="Dantoc"/>
+                            </group>
+                        </group>
+                        <group name="images">
+                            <group>
+                                <field name="chieucao"/>
+                                <field name="cannang"/>
+                            </group>
+                            <group>
+                                <field name="khoadt"/>
+                                <field name="bacsi"/>
+                                <field name="tgvaovien"/>
+                                <field name="tgravien"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="general_information" string="Thông tin bệnh">
+								<group>
+                                    <field name="benhchinh"/>
+                                    <field name="benhphu"/>
+                                    <field name="tinhtrang"/>
+								</group>
+							</page>
+							<page name="additional_information" string="Thông tin người thân">
+								<group>
+									<field name="tennt"/>
+                                    <field name="sdt"/>
+                                    <field name="diac"/>
+								</group>
+							</page>
+						</notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="my_patients_tree_view" model="ir.ui.view">
+            <field name="name">my.patients.tree.view</field>
+            <field name="model">my.patients</field>
+            <field name="arch" type="xml">
+                <tree string="Patients" default_order="create_date desc">
+                    <field name="ten"/>
+                    <field name="tuoi"/>
+                    <field name="gioitinh"/>
+                    <field name="ngaysinh"/>
+                    <field name="sotheBHYT"/>
+                    <field name="cmnd"/>
+                    <field name="nghenghiep"/>
+                    <field name="diachi"/>
+                    <field name="sdthoai"/>
+                    <field name="Dantoc"/>
+                    <field name="chieucao"/>
+                    <field name="cannang"/>
+                    <field name="tgvaovien"/>
+                    <field name="khoadt"/>
+                    <field name="bacsi"/>
+                    <field name="benhchinh"/>
+                    <field name="benhphu"/>
+                    <field name="tgravien"/>
+                    <field name="tinhtrang"/>
+                    <field name="tennt"/>
+                    <field name="sdt"/>
+                    <field name="diac"/>
+                    <field name="bn_image"/>
+                    <field name="benhnhan_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="my_patients_act" model="ir.actions.act_window">
+            <field name="name">Patients</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">my.patients</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_content_create">
+                Create your first patient!
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="my_patients_menu"
+                  name="Patients"
+                  action="my_patients_act"
+                  sequence="10"/>
+    </data>
+</odoo>
