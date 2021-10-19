@@ -11,7 +11,8 @@
     'license': 'LGPL-3',
     'depends' : [],
     'data': [
-        'views/medicalrecord.xml'
+        'security/ir.model.access.csv',
+        'views/bnviews.xml',
     ],
     'demo': [],
     'qweb': [],
