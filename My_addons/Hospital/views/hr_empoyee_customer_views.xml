@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="hr_employee_form_view_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.form.view.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='mobile_phone']" position="attributes">
+                    <attribute name="string">Số điện thoại cá nhân</attribute>
+                </xpath>
+                <field name="mobile_phone" position="before">
+                    <field name="code"/>
+                </field>
+                <xpath expr="//field[@name='job_title']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <field name="mobile_phone" position="after">
+                    <field name="x_job"/>
+                </field>
+                <xpath expr="//field[@name='coach_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <field name="parent_id" position="after">
+                    <field name="x_date_start"/>
+                </field>
+                <field name="x_date_start" position="after">
+                    <field name="x_end"/>
+                </field>
+                <xpath expr="//label[@for='km_home_work']" position="attributes">
+                    <attribute name="string">Số km đến công ty</attribute>
+                </xpath>
+
+
+
+            </field>
+        </record>
+    </data>
+</odoo>
