@@ -18,6 +18,7 @@ class InventoryGoods(models.Model):
     # ], default='male')
     gender = fields.Selection([('male', 'Male'),
                               ('female', 'Female')], default='male')
+    phone = fields.Char(string='Phone', required=True)
     job = fields.Char(string='Job', required=True, translate=True)
     nation = fields.Char(string='Nation', required=True, translate=True)
     address = fields.Char(string='Address', required=True, translate=True)
@@ -28,8 +29,19 @@ class InventoryGoods(models.Model):
         ('exempt', 'Exempt'),
         ('other', 'Other'),
     ], default='insurance')
+    code_object = fields.Char(string='Code BHYT', required=True)
+    place = fields.Text('PLace')
     start_date = fields.Date(string='Start Date', help="Enter the start date of health insurance.")
     end_date = fields.Date(string='End Date', help="Enter the end date of health insurance.")
+    cmnd = fields.Char(string='CMND', required=True)
+    height = fields.Char('Height', required=True)
+    weight = fields.Char('Weight', required=True)
+    blood_group = fields.Selection([
+        ('a', 'A'),
+        ('b', 'B'),
+        ('o', 'O'),
+        ('ab', 'AB')
+    ], string='Blood Group', default='a')
     note = fields.Text(string='Description of contact information')
     start_date_hospital = fields.Date(string='Hospitalized Day', help="Enter the hospital admission date.")
     end_date_hospital = fields.Date(string='Hospital Discharge Date', help="Enter the hospital discharge date.")
@@ -37,6 +49,7 @@ class InventoryGoods(models.Model):
     hospital_room = fields.Char(string='Hospital Room', required=True)
     hospital_bed = fields.Char(string='Hospital Bed', required=True)
     doctor = fields.Char(string='Doctor', required=True)
+    nurse = fields.Char(string='Nurse')
     patient_test = fields.Char(string='Patient Test', required=True)
     image = fields.Binary(string='Images')
     treatments = fields.Char(string='Treatments', required=True)
@@ -47,6 +60,7 @@ class InventoryGoods(models.Model):
         ('sicker', 'Get Sicker'),
         ('dead', 'Dead'),
     ], default='cured')
+    note_sick = fields.Text(string='Description of illness information')
 
     @api.model
     def create(self, vals):
