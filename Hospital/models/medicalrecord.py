@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
-from odoo import api, fields, models
+import datetime
+
+from odoo import api, fields, models, _
 
 
 class InventoryGoods(models.Model):
     _name = "medical.record"
     _description = "Medical Record"
+    code = fields.Char(string='HSBA', required=True, copy=False, readonly=True,
+                       default=lambda seft: _('New'))
     patient_name = fields.Char(string='Patient Name', required=True, translate=True)
-    date = fields.Date(string='Date of birth', required=True)
-    age = fields.Integer('Age', required=True)
+    bdate = fields.Date(string='Date of birth', required=True)
+    patient_age = fields.Char(string='Age', compute="_get_age_from_patient")
     # gender = fields.Selection([
     #     ('male', 'Male'),
     #     ('female', 'Female'),
@@ -43,3 +47,21 @@ class InventoryGoods(models.Model):
         ('sicker', 'Get Sicker'),
         ('dead', 'Dead'),
     ], default='cured')
+
+    @api.model
+    def create(self, vals):
+        if vals.get('code', ('New')) == ('New'):
+            vals['code'] = self.env['ir.sequence'].next_by_code('medical.record') or _('New')
+        res = super(InventoryGoods, self).create(vals)
+        return res
+
+    def _get_age_from_patient(self):
+        today_date = datetime.date.today()
+        for patient in self:
+            if patient.bdate:
+                bdate = fields.Datetime.to_datetime(patient.bdate).date()
+                age = str(int((today_date - bdate).days / 365))
+                patient.patient_age = age
+            else:
+                patient.patient_age = ""
+
