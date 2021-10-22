@@ -7,34 +7,101 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <group>
+                    <!-- Code view -->
+                    <div class="oe_title">
+                        <h1>
+                            <field name="code" readonly="1"/>
+                        </h1>
+                    </div>
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="patient_name"/>-->
+<!--                            <field name="bdate"/>-->
+<!--                            <field name="patient_age"/>-->
+<!--                            <field name="gender"/>-->
+<!--                            <field name="job"/>-->
+<!--                            <field name="nation"/>-->
+<!--                            <field name="address"/>-->
+<!--                            <field name="workplace"/>-->
+<!--                            <field name="object"/>-->
+<!--                            <field name="start_date"/>-->
+<!--                            <field name="end_date"/>-->
+<!--                            <field name="note"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="start_date_hospital"/>-->
+<!--                            <field name="end_date_hospital"/>-->
+<!--                            <field name="department"/>-->
+<!--                            <field name="hospital_room"/>-->
+<!--                            <field name="hospital_bed"/>-->
+<!--                            <field name="doctor"/>-->
+<!--                            <field name="patient_test"/>-->
+<!--                            <field name="image"/>-->
+<!--                            <field name="treatments"/>-->
+<!--                            <field name="result"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
                         <group>
-                            <field name="patient_name"/>
-                            <field name="date"/>
-                            <field name="age"/>
-                            <field name="gender"/>
-                            <field name="job"/>
-                            <field name="nation"/>
-                            <field name="address"/>
-                            <field name="workplace"/>
-                            <field name="object"/>
-                            <field name="start_date"/>
-                            <field name="end_date"/>
-                            <field name="note"/>
+                            <group>
+                                <field name="image" string="Images" widget="image"/>
+                            </group>
+                            <group>
+                                <field name="patient_name"/>
+                                <field name="bdate"/>
+                                <field name="patient_age"/>
+                                <field name="gender"/>
+                                <field name="phone"/>
+                                <field name="job"/>
+                                <field name="workplace"/>
+                                <field name="nation"/>
+                                <field name="address"/>
+                            </group>
                         </group>
-                        <group>
-                            <field name="start_date_hospital"/>
-                            <field name="end_date_hospital"/>
-                            <field name="department"/>
-                            <field name="hospital_room"/>
-                            <field name="hospital_bed"/>
-                            <field name="doctor"/>
-                            <field name="patient_test"/>
-                            <field name="image"/>
-                            <field name="treatments"/>
-                            <field name="result"/>
+                        <group name="images">
+                            <group>
+                                <field name="cmnd"/>
+                                <field name="object"/>
+                                <field name="code_object"/>
+                                <field name="place"/>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                            </group>
+                            <group>
+                                <field name="height"/>
+                                <field name="weight"/>
+                                <field name="blood_group"/>
+                                <field name="note"/>
+                            </group>
                         </group>
-                    </group>
+                        <notebook>
+                            <page name="general_information" string="Thông tin bệnh lý">
+                                <group name="ttbl">
+								    <group>
+                                        <field name="patient_test"/>
+                                        <field name="treatments"/>
+                                        <field name="result"/>
+                                    </group>
+                                    <group>
+                                        <field name="start_date_hospital"/>
+                                        <field name="end_date_hospital"/>
+                                        <field name="note_sick"/>
+								    </group>
+                                </group>
+							</page>
+                            <page name="information_doctor" string="Thông tin bác sĩ">
+                                <group name="ttbs">
+								    <group>
+                                        <field name="doctor"/>
+                                        <field name="department"/>
+                                    </group>
+                                    <group>
+                                        <field name="nurse"/>
+                                        <field name="hospital_room"/>
+                                        <field name="hospital_bed"/>
+								    </group>
+                                </group>
+							</page>
+						</notebook>
                 </sheet>
             </form>
         </field>
@@ -58,7 +125,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="patient_name"/>
-                <field name="age"/>
+                <field name="patient_age"/>
                 <field name="start_date_hospital"/>
                 <field name="end_date_hospital"/>
                 <field name="department"/>
@@ -77,11 +144,12 @@
     <menuitem id="hospital_medical_record_root"
               name="Medical Record"
               parent="hospital_root"
-              sequence="10"/>
-    <menuitem id="hospital_medical_record"
-              name="Medical Record"
-              parent="hospital_medical_record_root"
               action="hospital_action"
               sequence="10"/>
+<!--    <menuitem id="hospital_medical_record"-->
+<!--              name="Medical Record"-->
+<!--              parent="hospital_medical_record_root"-->
+<!--              action="hospital_action"-->
+<!--              sequence="10"/>-->
 
 </odoo>
