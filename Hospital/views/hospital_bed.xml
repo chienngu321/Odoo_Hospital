@@ -36,7 +36,23 @@
                 <xpath expr="//field[@name='standard_price']" position="replace">
                     <!-- empty -->
                 </xpath>
-                
+                <xpath expr="//page[1]" position="inside">
+                <group>
+                    <field name="id_bed"/>
+                    <field name="chucnang"/>
+                    <field name="trangthai"/>
+                    <field name="chatlieu"/>
+                </group>
+                </xpath>
+                <xpath expr="//page[2]" position="inside">
+                <group>
+                    <field name="chieudai"/>
+                    <field name="chieurong"/>
+                    <field name="chieucao"/>
+                    <field name="trongluong"/>
+                    <field name="taitrong"/>
+                </group>
+                </xpath>
             </field>
         </record>
     </data>
