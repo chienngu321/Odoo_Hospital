@@ -9,9 +9,13 @@
     'category': 'Productivity',
     'website': 'https://www.odoo.hospital',
     'license': 'LGPL-3',
-    'depends' : [],
+    'depends' : ['hr', 'base'],
     'data': [
-        'views/medicalrecord.xml'
+        'data/data.xml',
+        'data/data_pt.xml',
+        'views/medicalrecord.xml',
+        'views/bnviews.xml',
+        'views/employee.xml',
     ],
     'demo': [],
     'qweb': [],
