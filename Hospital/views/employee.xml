@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="hr_employee_form_view_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.form.view.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='mobile_phone']" position="attributes">
+                    <attribute name="string">Số điện thoại cá nhân</attribute>
+                </xpath>
+                <field name="mobile_phone" position="before">
+                    <field name="code"/>
+                </field>
+                <xpath expr="//field[@name='job_title']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <field name="mobile_phone" position="after">
+                    <field name="x_job"/>
+                </field>
+                <xpath expr="//field[@name='coach_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <field name="parent_id" position="after">
+                    <field name="x_date_start"/>
+                </field>
+                <field name="x_date_start" position="after">
+                    <field name="x_end"/>
+                </field>
+                <xpath expr="//label[@for='km_home_work']" position="attributes">
+                    <attribute name="string">Số km đến công ty</attribute>
+                </xpath>
+                     <xpath expr="//field[@name='department_id']" position="attributes">
+                <attribute name="string">Khoa</attribute>
+            </xpath>
+                 <field name="emergency_contact" position="before">
+                    <field name="ten_bo"/>
+                </field>
+                 <field name="ten_bo" position="after">
+                    <field name="nghe_bo"/>
+                </field>
+                 <field name="nghe_bo" position="after">
+                    <field name="ten_me"/>
+                </field>
+                 <field name="ten_me" position="after">
+                    <field name="nghe_me"/>
+                </field>
+                   <xpath expr="//field[@name='emergency_contact']" position="attributes">
+                <attribute name="string">Địa chỉ liên hệ</attribute>
+            </xpath>
+                 <xpath expr="//field[@name='study_field']" position="attributes">
+                <attribute name="string">Ngành học</attribute>
+            </xpath>
+            </field>
+        </record>
+                <record id="action_hr_employee" model="ir.actions.act_window">
+            <field name="name">Nhân viên</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_mode">tree,form,kanban,activity</field>
+        </record>
+        <!--        tao menu -->
+        <menuitem id="hospital_root"
+                  name="Hospital"
+                  sequence="10"/>
+<!--        <menuitem id="menu_hospital"-->
+<!--                  name="Quản lý bệnh viện"-->
+<!--                  parent="menu_hospital"-->
+<!--                  action="action_hr_employee"-->
+<!--                  sequence="10"-->
+<!--                  groups="base.group_user"/>-->
+        <menuitem id="menu_hr_employee"
+                  parent="hospital_root"
+                  name="Employee"
+                  action="action_hr_employee"
+                  sequence="10"/>
+    </data>
+</odoo>
