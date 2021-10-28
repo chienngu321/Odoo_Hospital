@@ -1,1 +1,1 @@
-from . import medicalrecord
+from . import hr_empoyee_customer
