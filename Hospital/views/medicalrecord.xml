@@ -10,7 +10,7 @@
                     <!-- Code view -->
                     <div class="oe_title">
                         <h1>
-                            <field name="code" readonly="1"/>
+                            <field name="name" readonly="1"/>
                         </h1>
                     </div>
                     <!--                    <group>-->
@@ -43,7 +43,7 @@
                     <!--                    </group>-->
                     <group>
                         <group>
-                            <field name="image" string="Images" widget="image"/>
+                            <field name="image" string="Images" widget="image" class="oe_avatar"/>
                         </group>
                         <group>
                             <field name="code_bn"/>
@@ -61,11 +61,10 @@
                         <group>
                             <field name="diagnostic"/>
                             <field name="treatment"/>
-                            <field name="note"/>
                         </group>
                         <group>
-                            <field name="start_date"/>
-                            <field name="end_date"/>
+                            <field name="room"/>
+                            <field name="bed_bn"/>
                         </group>
                     </group>
                     <notebook>
@@ -88,6 +87,7 @@
                                     <field name="qtbly"/>
                                     <field name="kham"/>
                                     <field name="benhkem"/>
+                                    <field name="note_sick"/>
                                 </group>
                                 <group>
                                     <field name="heart"/>
@@ -96,7 +96,6 @@
                                     <field name="nhiptho"/>
                                     <field name="cannang"/>
                                     <field name="chieucao"/>
-                                    <field name="note_sick"/>
                                 </group>
                             </group>
                         </page>
@@ -123,12 +122,11 @@
         <field name="model">medical.record</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="code"/>
+                <field name="name"/>
                 <field name="code_bn"/>
                 <field name="patient_name"/>
                 <field name="patient_age"/>
-                <field name="start_date"/>
-                <field name="end_date"/>
+                <field name="start_date_hospital"/>
                 <field name="doctor"/>
                 <field name="diagnostic"/>
             </tree>
@@ -143,10 +141,10 @@
               parent="hospital_root"
               action="hospital_action"
               sequence="10"/>
-<!--    <menuitem id="hospital_medical_record"-->
-<!--              name="Medical Record"-->
-<!--              parent="hospital_medical_record_root"-->
-<!--              action="hospital_action"-->
-<!--              sequence="10"/>-->
+    <!--    <menuitem id="hospital_medical_record"-->
+    <!--              name="Medical Record"-->
+    <!--              parent="hospital_medical_record_root"-->
+    <!--              action="hospital_action"-->
+    <!--              sequence="10"/>-->
 
 </odoo>
