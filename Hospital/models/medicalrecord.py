@@ -6,9 +6,10 @@ from odoo import api, fields, models, _
 
 class MedicalRecord(models.Model):
     _name = "medical.record"
-    code = fields.Char(string='HSBA', required=True, copy=False, readonly=True,
+    name = fields.Char(string='HSBA', required=True, copy=False, readonly=True,
                        default=lambda seft: _('New'))
-    code_bn = fields.Char(string='Mã Bệnh Nhân', required=True)
+    # code_bn = fields.Char(string='Mã Bệnh Nhân', required=True)
+    code_bn = fields.Many2one('my.patients')
     patient_name = fields.Char(string='Tên Bệnh Nhân', required=True, translate=True)
     bdate = fields.Date(string='Ngày Sinh', required=True)
     patient_age = fields.Char(string='Tuổi', compute="_get_age_from_patient")
@@ -22,9 +23,8 @@ class MedicalRecord(models.Model):
     address = fields.Char(string='Địa Chỉ', required=True, translate=True)
     workplace = fields.Char(string='Nơi Làm Việc', required=True, translate=True)
     object_bn = fields.Char(string='Đối Tượng', required=True)
-    start_date = fields.Date(string='Ngày Khám', help="Vui Lòng chọn thời gian ngày khám.")
-    end_date = fields.Date(string='Ngày Kết Thúc', help="Vui Lòng chọn thời gian ngày kết thúc.")
-    note = fields.Text(string='Kết Luận')
+    room = fields.Char(string='Phòng')
+    bed_bn = fields.Char(string='Giường')
     diagnostic = fields.Char(string='Chuẩn Đoán', required=True)
     treatment = fields.Selection([
         ('nhapvien', 'Nhập Viện Điều Trị'),
@@ -35,7 +35,7 @@ class MedicalRecord(models.Model):
     family = fields.Char('Gia Đình', required=True)
     diungthuoc = fields.Boolean(string='Dị Ứng Thuốc')
     start_date_hospital = fields.Date(string='Ngày Khám')
-    doctor = fields.Char(string='Bác Sỹ', required=True)
+    doctor = fields.Char(string='Bác Sĩ', required=True)
     qtbly = fields.Char(string='Quá Trình Bệnh Lý', required=True)
     kham = fields.Char(string='Khám Lâm Sàng', required=True)
     heart = fields.Char(string='Nhịp Tim', required=True)
@@ -46,12 +46,12 @@ class MedicalRecord(models.Model):
     chieucao = fields.Char(string='Chiều Cao', required=True)
     benhkem = fields.Char(string='Bệnh Kèm Theo', required=True)
     note_sick = fields.Text(string='Mô Tả Kết Luận')
-    image = fields.Binary(string='Images')
+    image = fields.Binary(string='Hình Ảnh')
 
     @api.model
     def create(self, vals):
-        if vals.get('code', ('New')) == ('New'):
-            vals['code'] = self.env['ir.sequence'].next_by_code('medical.record') or _('New')
+        if vals.get('name', ('New')) == ('New'):
+            vals['name'] = self.env['ir.sequence'].next_by_code('medical.record') or _('New')
         res = super(MedicalRecord, self).create(vals)
         return res
 
