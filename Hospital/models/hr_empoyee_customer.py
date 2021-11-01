@@ -19,6 +19,7 @@ class Employee(models.Model):
     nghe_bo=fields.Char("Nghề nghiệp")
     ten_me=fields.Char("Tên mẹ")
     nghe_me=fields.Char("Nghề nghiệp")
+    giadinh=fields.Char("Thông tin gia đình", readonly=True)
 
     @api.constrains('code')
     def _check_code(self):
