@@ -33,7 +33,7 @@
                      <xpath expr="//field[@name='department_id']" position="attributes">
                 <attribute name="string">Khoa</attribute>
             </xpath>
-                 <field name="emergency_contact" position="before">
+                 <field name="emergency_contact" position="before" >
                     <field name="ten_bo"/>
                 </field>
                  <field name="ten_bo" position="after">
@@ -45,7 +45,8 @@
                  <field name="ten_me" position="after">
                     <field name="nghe_me"/>
                 </field>
-                   <xpath expr="//field[@name='emergency_contact']" position="attributes">
+
+                   <xpath expr="//field[@name='emergency_contact']" position="attributes" >
                 <attribute name="string">Địa chỉ liên hệ</attribute>
             </xpath>
                  <xpath expr="//field[@name='study_field']" position="attributes">
@@ -64,6 +65,27 @@
                     <attribute name="invisible">1</attribute>
                 </xpath>
                  <xpath expr="//field[@name='visa_expire']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                  <xpath expr="//group[@name='managers']" position="attributes">
+                   <attribute name="string"></attribute>
+                 </xpath>
+                  <xpath expr="//page[@name='hr_settings']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                 <xpath expr="//group[@name='managers']" position="attributes">
+                   <attribute name="string"></attribute>
+                 </xpath>
+                  <xpath expr="//group[@name='work_permit']" position="attributes">
+                   <attribute name="string"></attribute>
+                 </xpath>
+                  <xpath expr="//field[@name='work_location']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='phone']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='private_email']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
             </field>
