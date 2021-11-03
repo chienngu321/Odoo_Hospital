@@ -9,7 +9,7 @@ class MedicalRecord(models.Model):
     name = fields.Char(string='HSBA', required=True, copy=False, readonly=True,
                        default=lambda seft: _('New'))
     # code_bn = fields.Char(string='Mã Bệnh Nhân', required=True)
-    code_bn = fields.Many2one('my.patients')
+    code_bn = fields.Many2one('my.patients', string='Mã Bệnh Nhân')
     patient_name = fields.Char(string='Tên Bệnh Nhân', required=True, translate=True)
     bdate = fields.Date(string='Ngày Sinh', required=True)
     patient_age = fields.Char(string='Tuổi', compute="_get_age_from_patient")
@@ -18,14 +18,14 @@ class MedicalRecord(models.Model):
     #     ('female', 'Female'),
     # ], default='male')
     gender = fields.Selection([('male', 'Nam'),
-                               ('female', 'Nữ')], default='male')
+                               ('female', 'Nữ')], string='Giới Tính', default='male')
     job = fields.Char(string='Nghề Nghiệp', required=True, translate=True)
     address = fields.Char(string='Địa Chỉ', required=True, translate=True)
     workplace = fields.Char(string='Nơi Làm Việc', required=True, translate=True)
     object_bn = fields.Char(string='Đối Tượng', required=True)
-    room = fields.Char(string='Phòng')
+    khoa = fields.Many2one('hr.department', string='Khoa')
     bed_bn = fields.Char(string='Giường')
-    diagnostic = fields.Char(string='Chuẩn Đoán', required=True)
+    diagnostic = fields.Text(string='Chuẩn Đoán', required=True)
     treatment = fields.Selection([
         ('nhapvien', 'Nhập Viện Điều Trị'),
         ('capcuu', 'Cấp Cứu Khẩn Cấp'),
@@ -35,7 +35,7 @@ class MedicalRecord(models.Model):
     family = fields.Char('Gia Đình', required=True)
     diungthuoc = fields.Boolean(string='Dị Ứng Thuốc')
     start_date_hospital = fields.Date(string='Ngày Khám')
-    doctor = fields.Char(string='Bác Sĩ', required=True)
+    doctor = fields.Many2one('hr.employee', string='Bác Sĩ', required=True)
     qtbly = fields.Char(string='Quá Trình Bệnh Lý', required=True)
     kham = fields.Char(string='Khám Lâm Sàng', required=True)
     heart = fields.Char(string='Nhịp Tim', required=True)
@@ -47,6 +47,7 @@ class MedicalRecord(models.Model):
     benhkem = fields.Char(string='Bệnh Kèm Theo', required=True)
     note_sick = fields.Text(string='Mô Tả Kết Luận')
     image = fields.Binary(string='Hình Ảnh')
+    medicine_lines = fields.One2many('medicine.lines', 'medicine_id')
 
     @api.model
     def create(self, vals):
@@ -65,3 +66,10 @@ class MedicalRecord(models.Model):
             else:
                 patient.patient_age = ""
 
+
+class MedicineLines(models.Model):
+    _name = "medicine.lines"
+    product_id = fields.Many2one('product.template', string="Tên Thuốc")
+    product_qty = fields.Char(string="Số Lượng")
+    ghichu = fields.Text(string='Ghi Chú')
+    medicine_id = fields.Many2one('medical.record')
