@@ -3,33 +3,24 @@ from odoo import api, fields, models, tools, _
 from odoo.exceptions import UserError, ValidationError
 
 
-class Patients(models.Model):
+class QLBN(models.Model):
     _name = "my.patients"
-    _description = "Patients model"
-    benhnhan_id = fields.Char(string='', required=True, copy=False, readonly=True,
-                              default=lambda seft: _('New'))
-    ten = fields.Char('Họ và tên:', required=True)
-    tuoi = fields.Integer('Tuổi:', required=True)
+    _description = "QLBN model"
+    ten = fields.Char('Họ và Tên:', required=True)
+    ngaysinh = fields.Date('Ngày sinh:', required=True)
     gioitinh = fields.Selection([
         ('nam', 'Nam'),
         ('nu', 'Nữ'),
         ('khac', 'Khác')
-    ], string='Giới tính:', default='Nam')
-    ngaysinh = fields.Date('Ngày sinh:', required=False)
-    sotheBHYT = fields.Char('Số thẻ BHYT:', required=True)
-    noicap = fields.Text('Nơi cấp thẻ:')
-    dt = fields.Selection([
-        ('mot', '1'),
-        ('hai', '2'),
-        ('ba', '3')
-    ], string='Đối tượng miễn giảm:', default='mot')
-    cmnd = fields.Char('CMND:', required=True)
-    nghenghiep = fields.Char('Nghề nghiệp:', required=True)
+    ], string='Giới tính:', default='nam')
+    qg = fields.Many2one('res.country', 'Quốc gia:', required=True)
+    cmnd = fields.Char('CMND:', required=False)
+    nghenghiep = fields.Char('Nghề nghiệp:', required=False)
+    noilv = fields.Char('Nơi làm việc:', required=False)
     diachi = fields.Char('Địa chỉ:', required=True)
     sdthoai = fields.Char('Số điện thoại:', required=True)
-    Dantoc = fields.Char('Dân tộc:', required=True)
-    chieucao = fields.Char('Chiều cao:', required=True)
-    cannang = fields.Char('Cân nặng:', required=True)
+    chieucao = fields.Char('Chiều cao (cm):', required=False)
+    cannang = fields.Char('Cân nặng (kg):', required=False)
     mau = fields.Selection([
         ('a', 'A'),
         ('b', 'B'),
@@ -37,34 +28,49 @@ class Patients(models.Model):
         ('ab', 'AB'),
         ('hiem', 'Hiếm')
     ], string='Nhóm máu:', default='a')
-    tgvaovien = fields.Date('Thời gian vào viện:', required=False)
-    khoadt = fields.Selection([
-        ('noi', 'Khoa Nội'),
-        ('ngoai', 'Khoa Ngoại'),
-        ('phusan', 'Khoa Phụ Sản'),
-        ('tnhiem', 'Khoa Truyền Nhiễm'),
-        ('capcuu', 'Khoa Cấp Cứu')
-    ], string='Khoa điều trị:', default='noi')
-    bacsi = fields.Char('Bác sĩ điều trị:', required=True)
-    trieuchungcu = fields.Text('Triệu chứng cũ:')
-    benhchinh = fields.Text('Bệnh chính:')
-    benhphu = fields.Text('Bệnh kèm theo:')
-    Huongdt = fields.Selection([
-        ('nhapvien', 'Nhập viện điều trị'),
-        ('duathuoc', 'Kê đơn thuốc và về nhà'),
-    ], string='Hướng điều trị:', default='nhapvien')
+    tgvaovien = fields.Date('Thời gian vào viện:', required=True)
+    lydo = fields.Char('Lý do vào viện:', required=False)
     tgravien = fields.Date('Thời gian ra viện:', required=False)
-    tinhtrang = fields.Text('Tình trạng ra viện:')
-    tennt = fields.Char('Họ và tên:', required=True)
+    kham = fields.Char('Khám:', required=True)
+    sotheBHYT = fields.Char('Số thẻ BHYT:', required=True)
+    noicap = fields.Text('Nơi đăng ký thẻ:', required=False)
+    tuyen = fields.Selection([
+        ('noi', 'Nội tuyến'),
+        ('ngoai', 'Ngoại tuyến'),
+        ('co', 'Có giấy CV')
+    ], string='Tuyến:', default='noi')
+    tungay = fields.Date('Từ ngày:', required=False)
+    denngay = fields.Date('Đến ngày:', required=False)
+    du = fields.Date('Đủ 5 năm:', required=False)
+    khuvuc = fields.Selection([
+        ('k1', 'K1'),
+        ('k2', 'K2'),
+        ('k3', 'K3')
+    ], string='Khu vực:', default='k1')
+    action = fields.One2many('family.action', 'family', string='Thông tin người thân', required=True)
+    bn_image = fields.Binary("Ảnh thẻ", attachment=True, help="Ảnh thẻ")
+    name = fields.Char(string='Mã bệnh nhân:', required=True, copy=False, readonly=True,
+                              default=lambda seft: _('Mã BN'))
+    benh_li = fields.Many2many('medical.record', string="Bệnh Lí:")
+
+    @api.model
+    def create(self, values):
+        if values.get('name', ('Mã BN')) == ('Mã BN'):
+            values['name'] = self.env['ir.sequence'].next_by_code('my.patients') or _('Mã BN')
+        res = super(QLBN, self).create(values)
+        return res
+
+    @api.constrains('tgravien')
+    def _check_tgravien(self):
+        if (self.tgvaovien and self.tgravien) and (self.tgravien <= self.tgvaovien):
+            raise ValidationError('Thời gian ra viện phải lớn hơn hoặc bằng thời gian vào viện! ')
+
+
+class Family(models.Model):
+    _name = "family.action"
+    _description = "Action model"
+    family = fields.Many2one('my.patients', string='Mã bệnh nhân:', required=True)
+    name_action = fields.Char('Họ và tên:', required=True)
     quanhe = fields.Char('Quan hệ:', required=True)
     sdt = fields.Char('Số điện thoại:', required=True)
     diac = fields.Char('Địa chỉ:', required=True)
-    # benhnhan_id = fields.Char('Mã bệnh nhân:', required=True)
-    bn_image = fields.Binary("Ảnh thẻ", attachment=True, help="Ảnh thẻ")
-
-    @api.model
-    def create(self, vals):
-        if vals.get('benhnhan_id', ('New')) == ('New'):
-            vals['benhnhan_id'] = self.env['ir.sequence'].next_by_code('my.patients') or _('New')
-        res = super(Patients, self).create(vals)
-        return res
