@@ -43,7 +43,7 @@
                     <!--                    </group>-->
                     <group>
                         <group>
-                            <field name="image" string="Images" widget="image" class="oe_avatar"/>
+                            <field name="image" string="Hình Ảnh" widget="image" class="oe_avatar"/>
                         </group>
                         <group>
                             <field name="code_bn"/>
@@ -63,7 +63,7 @@
                             <field name="treatment"/>
                         </group>
                         <group>
-                            <field name="room"/>
+                            <field name="khoa"/>
                             <field name="bed_bn"/>
                         </group>
                     </group>
@@ -99,6 +99,27 @@
                                 </group>
                             </group>
                         </page>
+                        <page string="Kê Đơn Thuốc">
+                            <field name="medicine_lines">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="product_qty"/>
+                                    <field name="ghichu"/>
+                                    <field name="medicine_id" invisible="1"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="product_id"/>
+                                            <field name="product_qty"/>
+                                        </group>
+                                        <group>
+                                            <field name="ghichu"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
             </form>
@@ -106,7 +127,7 @@
     </record>
 
     <record id="hospital_action" model="ir.actions.act_window">
-        <field name="name">Medical Record</field>
+        <field name="name">Hồ Sơ Bệnh Án</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">medical.record</field>
         <field name="view_mode">tree,form,kanban</field>
@@ -134,10 +155,10 @@
     </record>
     <!-- Top menu item -->
     <menuitem id="hospital_root"
-              name="Hospital"
+              name="Bệnh Viện"
               sequence="10"/>
     <menuitem id="hospital_medical_record_root"
-              name="Medical Record"
+              name="Hồ Sơ Bệnh Án"
               parent="hospital_root"
               action="hospital_action"
               sequence="10"/>
