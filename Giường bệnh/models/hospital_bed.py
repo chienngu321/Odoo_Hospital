@@ -27,7 +27,7 @@ class HospitalBed(models.Model):
     gioitinh = fields.Selection([
         ('nam', 'Nam'),
         ('nu', 'Nữ')
-    ], string='Giới tính', required=True, default='Nam')
+    ], string='Giới tính', required=True, default='nam')
 
     chuandoan = fields.Char('Chuẩn đoán bệnh', required=True)
     thoigian_nhapvien = fields.Date(string='Thời gian nhập viện', help="Nhập thời gian bắt đầu nhập viện.")
