@@ -35,9 +35,6 @@ class HospitalBed(models.Model):
     bacsi_phutrach = fields.Char('Bác sĩ phụ trách', required=True)
     phongbenh = fields.Char('Tên phòng', required=True)
     note = fields.Text('Ghi chú:', required=True)
-
-    # modify old fields
-    name = fields.Char('Tên giường', index=True, required=True, translate=True)
     loai = fields.Selection([
         ('coban', 'Giường y tế cơ bản'),
         ('dachucnang', 'Giường đa chức năng')

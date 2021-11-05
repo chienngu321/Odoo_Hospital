@@ -91,9 +91,7 @@
                     <field name="taitrong"/>
                 </xpath>
 
-                <xpath expr="//field[@name='name']" position="attributes">
-                    <attribute name="string">Tên giường bệnh</attribute>
-                </xpath>
+               
 
             </field>
         </record>
