@@ -6,6 +6,9 @@
             <field name="model">product.template</field>
             <field name="inherit_id" ref="product.product_template_only_form_view"/>
             <field name="arch" type="xml">
+               <xpath expr="//label[@for='name']" position="attributes">
+                    <attribute name="string">Tên giường bệnh</attribute>
+               </xpath>
                <notebook>
                <page string="Thông tin chi tiết giường bệnh" name="Detailed Tnformation" >
                      <group name="ttctgb">
@@ -90,9 +93,6 @@
                     <field name="trongluong"/>
                     <field name="taitrong"/>
                 </xpath>
-
-               
-
             </field>
         </record>
         <record id="hospital_bed_act" model="ir.actions.act_window">
