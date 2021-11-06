@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="seq_code_medicalrecord" model="ir.sequence">
+            <field name="name">Code Medical Record Sequence</field>
+            <field name="code">medical.record</field>
+            <field name="prefix">HSBA</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>
