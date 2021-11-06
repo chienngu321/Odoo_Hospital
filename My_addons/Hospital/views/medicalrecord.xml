@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="medical_record_form" model="ir.ui.view">
+        <field name="name">hospital.medicalrecord.form</field>
+        <field name="model">medical.record</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <!-- Code view -->
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <!--                    <group>-->
+                    <!--                        <group>-->
+                    <!--                            <field name="patient_name"/>-->
+                    <!--                            <field name="bdate"/>-->
+                    <!--                            <field name="patient_age"/>-->
+                    <!--                            <field name="gender"/>-->
+                    <!--                            <field name="job"/>-->
+                    <!--                            <field name="nation"/>-->
+                    <!--                            <field name="address"/>-->
+                    <!--                            <field name="workplace"/>-->
+                    <!--                            <field name="object"/>-->
+                    <!--                            <field name="start_date"/>-->
+                    <!--                            <field name="end_date"/>-->
+                    <!--                            <field name="note"/>-->
+                    <!--                        </group>-->
+                    <!--                        <group>-->
+                    <!--                            <field name="start_date_hospital"/>-->
+                    <!--                            <field name="end_date_hospital"/>-->
+                    <!--                            <field name="department"/>-->
+                    <!--                            <field name="hospital_room"/>-->
+                    <!--                            <field name="hospital_bed"/>-->
+                    <!--                            <field name="doctor"/>-->
+                    <!--                            <field name="patient_test"/>-->
+                    <!--                            <field name="image"/>-->
+                    <!--                            <field name="treatments"/>-->
+                    <!--                            <field name="result"/>-->
+                    <!--                        </group>-->
+                    <!--                    </group>-->
+                    <group>
+                        <group>
+                            <field name="image" string="Hình Ảnh" widget="image" class="oe_avatar"/>
+                        </group>
+                        <group>
+                            <field name="code_bn"/>
+                            <field name="patient_name"/>
+                            <field name="bdate"/>
+                            <field name="patient_age"/>
+                            <field name="gender"/>
+                            <field name="job"/>
+                            <field name="address"/>
+                            <field name="workplace"/>
+                            <field name="object_bn"/>
+                        </group>
+                    </group>
+                    <group name="images">
+                        <group>
+                            <field name="diagnostic"/>
+                            <field name="treatment"/>
+                        </group>
+                        <group>
+                            <field name="khoa"/>
+                            <field name="bed_bn"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="general_information" string="Tiền Sử Khám">
+                            <group name="tsk">
+                                <group>
+                                    <field name="banthan"/>
+                                    <field name="family"/>
+                                </group>
+                                <group>
+                                    <field name="diungthuoc"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="information_doctor" string="Thông tin khám">
+                            <group name="ttk">
+                                <group>
+                                    <field name="start_date_hospital"/>
+                                    <field name="doctor"/>
+                                    <field name="qtbly"/>
+                                    <field name="kham"/>
+                                    <field name="benhkem"/>
+                                    <field name="note_sick"/>
+                                </group>
+                                <group>
+                                    <field name="heart"/>
+                                    <field name="temperature"/>
+                                    <field name="huyetap"/>
+                                    <field name="nhiptho"/>
+                                    <field name="cannang"/>
+                                    <field name="chieucao"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Kê Đơn Thuốc">
+                            <field name="medicine_lines">
+                                <tree editable="bottom">
+                                    <field name="thuoc"/>
+                                    <field name="product_qty"/>
+                                    <field name="tac_dung"/>
+                                    <field name="ghichu"/>
+                                    <field name="medicine_id" invisible="1"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="thuoc"/>
+                                            <field name="product_qty"/>
+                                        </group>
+                                        <group>
+                                            <field name="tac_dung"/>
+                                            <field name="ghichu"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hospital_action" model="ir.actions.act_window">
+        <field name="name">Hồ Sơ Bệnh Án</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">medical.record</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first medical record!
+            </p>
+        </field>
+    </record>
+    <!-- List view -->
+    <record id="Hospital_tree_view" model="ir.ui.view">
+        <field name="name">Hospital.Tree.View</field>
+        <field name="model">medical.record</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code_bn"/>
+                <field name="patient_name"/>
+                <field name="patient_age"/>
+                <field name="start_date_hospital"/>
+                <field name="doctor"/>
+                <field name="diagnostic"/>
+            </tree>
+        </field>
+    </record>
+    <!-- Top menu item -->
+    <menuitem id="hospital_root"
+              name="Bệnh Viện"
+              sequence="10"/>
+    <menuitem id="my_medical_menu"
+              name="Quản lý Hồ Sơ Bệnh Án Và Thuốc"
+              parent="hospital_root"
+              sequence="10"/>
+    <menuitem id="hospital_medical_record_root"
+              name="Hồ Sơ Bệnh Án"
+              parent="my_medical_menu"
+              action="hospital_action"
+              sequence="1"/>
+    <!--    <menuitem id="hospital_medical_record"-->
+    <!--              name="Medical Record"-->
+    <!--              parent="hospital_medical_record_root"-->
+    <!--              action="hospital_action"-->
+    <!--              sequence="10"/>-->
+
+</odoo>
