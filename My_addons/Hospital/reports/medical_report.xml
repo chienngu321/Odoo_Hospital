@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+            id="report_medical_record_card"
+            model="medical.record"
+            string="Báo cáo"
+            report_type="qweb-pdf"
+            name="Hospital.report_medical_record"
+            file="Hospital.report_medical_record"/>
+
+</odoo>
