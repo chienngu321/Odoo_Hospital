@@ -14,6 +14,7 @@
                         <group name="ttctgb">
                             <group>
                                 <field name="bn_image"/>
+                                <field name="code_bn"/>
                                 <field name="ten"/>
                                 <field name="tuoi"/>
                                 <field name="gioitinh"/>
@@ -22,11 +23,14 @@
                             <group>
                                 <field name="thoigian_nhapvien"/>
                                 <field name="songay_nhapvien"/>
-                                <field name="bacsi_phutrach"/>
+                                <field name="khoa"/>
                                 <field name="phongbenh"/>
                                 <field name="note"/>
                             </group>
                         </group>
+                    </page>
+                    <page name="nguoinam_information" string="Danh sách bệnh nhân">
+                        <field name="benh_li"/>
                     </page>
                 </notebook>
                 <xpath expr="//field[@name='sale_ok']" position="attributes">
