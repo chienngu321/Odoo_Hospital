@@ -151,6 +151,8 @@
                 <field name="patient_age"/>
                 <field name="start_date_hospital"/>
                 <field name="doctor"/>
+                <field name="khoa"/>
+                <field name="bed_bn"/>
                 <field name="diagnostic"/>
             </tree>
         </field>
