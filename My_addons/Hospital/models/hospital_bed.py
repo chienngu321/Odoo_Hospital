@@ -9,40 +9,35 @@ class HospitalBed(models.Model):
     # add new fields
     id_bed = fields.Char(string='GB', required=True, copy=False, readonly=True,
                          default=lambda seft: _('New'))
+    cn = fields.Integer('Chức năng', required=False)
     chucnang = fields.Selection([
         ('capcuu', 'Cấp cứu'),
         ('benh', 'Bệnh')
-    ], string='Chức năng', required=True, default='benh')
-    trangthai = fields.Selection([
-        ('trong', 'Trống'),
-        ('day', 'Đầy')
-    ], string='Trạng thái', required=True, default='trong')
+    ], string='Loại Hình', required=True, default='benh')
+    so_luong = fields.Integer('Số Lượng', required=False)
     chieudai = fields.Char('Chiều dài', required=False)
     chieurong = fields.Char('Chiều rộng', required=False)
     chieucao = fields.Char('Chiều cao', required=False)
     chatlieu = fields.Char('Chất liệu', required=False)
     trongluong = fields.Char('Trọng lượng giường', required=False)
     taitrong = fields.Char('Tải trọng tối đa', required=False)
-    bn_image = fields.Binary("Ảnh bệnh nhân", attachment=False, help="Ảnh bệnh nhân")
-    code_bn = fields.Many2one('my.patients', string='Mã Bệnh Nhân')
-    ten = fields.Char('Họ và tên bệnh nhân', required=False)
-    tuoi = fields.Integer('Tuổi', required=False)
-    gioitinh = fields.Selection([
-        ('nam', 'Nam'),
-        ('nu', 'Nữ')
-    ], string='Giới tính', default='nam')
-
-    chuandoan = fields.Char('Chuẩn đoán bệnh', required=False)
-    thoigian_nhapvien = fields.Date(string='Thời gian nhập viện', help="Nhập thời gian bắt đầu nhập viện.")
-    songay_nhapvien = fields.Integer('Số ngày nhập viện', required=False)
-    khoa = fields.Many2one('hr.department', string='Khoa')
-    phongbenh = fields.Char('Tên phòng', required=False)
+    tinh_trang = fields.Selection([
+        ('new', 'Mới'),
+        ('old', 'Cũ')
+    ], string='Tình trạng giường', default='new')
+    th_sudung = fields.Selection([
+        ('a', '15 năm - 18 năm'),
+        ('b', '18 năm - 20 năm'),
+        ('c', '20 năm - 25 năm')
+    ], string='Thời hạn sử dụng', default='a')
+    tg_nhapgiuong = fields.Date(string='Thời gian nhập', help="Nhập thời gian bắt đầu nhập viện.")
     note = fields.Text('Ghi chú:', required=False)
     loai = fields.Selection([
         ('coban', 'Giường y tế cơ bản'),
         ('dachucnang', 'Giường đa chức năng')
     ], string='Loại giường', default='coban', required=True)
-    benh_li = fields.Many2many('medical.record', string="Danh sách bệnh nhân nằm")
+    tien = fields.Char('Giá tiền', required=False)
+    bed_inf = fields.One2many('medical.record', 'bed_bn')
 
     @api.model
     def create(self, vals):
