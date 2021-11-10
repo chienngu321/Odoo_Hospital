@@ -20,6 +20,7 @@ class Employee(models.Model):
     ten_me = fields.Char("Tên mẹ")
     nghe_me = fields.Char("Nghề nghiệp")
     giadinh = fields.Char("Thông tin gia đình", readonly=True)
+    medicine_inf = fields.One2many('medical.record', 'doctor')
 
     @api.constrains('code')
     def _check_code(self):
