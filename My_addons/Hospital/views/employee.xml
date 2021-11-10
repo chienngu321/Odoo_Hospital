@@ -9,6 +9,11 @@
                 <xpath expr="//field[@name='mobile_phone']" position="attributes">
                     <attribute name="string">Số điện thoại cá nhân</attribute>
                 </xpath>
+                <notebook>
+                    <page name="hsba_information" string="Danh sách hồ sơ bệnh án">
+                        <field name="medicine_inf"/>
+                    </page>
+                </notebook>
                 <field name="mobile_phone" position="before">
                     <field name="code"/>
                 </field>
