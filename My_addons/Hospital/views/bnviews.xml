@@ -31,8 +31,6 @@
                         <group name="cccn">
                             <group>
                                 <field name="tgvaovien"/>
-                                <field name="lydo"/>
-                                <field name="kham"/>
                                 <field name="tgravien"/>
                             </group>
                             <group>
