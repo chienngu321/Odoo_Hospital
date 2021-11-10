@@ -10,27 +10,22 @@
                     <attribute name="string">Tên giường bệnh</attribute>
                 </xpath>
                 <notebook>
-                    <page string="Thông tin chi tiết giường bệnh" name="Detailed Tnformation">
+                    <page string="Thông tin giường bệnh" name="Detailed Tnformation">
                         <group name="ttctgb">
                             <group>
-                                <field name="bn_image"/>
-                                <field name="code_bn"/>
-                                <field name="ten"/>
-                                <field name="tuoi"/>
-                                <field name="gioitinh"/>
-                                <field name="chuandoan"/>
+                                <field name="tg_nhapgiuong"/>
+                                <field name="th_sudung"/>
+                                <field name="tinh_trang"/>
                             </group>
                             <group>
-                                <field name="thoigian_nhapvien"/>
-                                <field name="songay_nhapvien"/>
-                                <field name="khoa"/>
-                                <field name="phongbenh"/>
+                                <field name="so_luong"/>
+                                <field name="tien"/>
                                 <field name="note"/>
                             </group>
                         </group>
                     </page>
                     <page name="nguoinam_information" string="Danh sách bệnh nhân">
-                        <field name="benh_li"/>
+                        <field name="bed_inf"/>
                     </page>
                 </notebook>
                 <xpath expr="//field[@name='sale_ok']" position="attributes">
@@ -82,12 +77,12 @@
                     <field name="loai"/>
                 </field>
                 <field name="barcode" position="after">
+                    <field name="cn"/>
+                </field>
+                <field name="cn" position="after">
                     <field name="chucnang"/>
                 </field>
-                <field name="barcode" position="after">
-                    <field name="trangthai"/>
-                </field>
-                <field name="trangthai" position="after">
+                <field name="loai" position="after">
                     <field name="chatlieu"/>
                 </field>
                 <xpath expr="//group[@name='group_standard_price']" position="inside">
