@@ -1,150 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <template id="report_medical_record">
         <t t-call="web.external_layout">
             <t t-call="web.html_container">
-                <t t-foreach="docs" t-as="doc">
-                    <h2>Test Print</h2>
-                    Bệnh Nhân:
-                    <t t-esc="doc.patient_name"/>
-                    Khoa Điều Trị:
-                    <t t-esc="doc.khoa"/>
-                    <!--                <div class="page">-->
-                    <!--                    <div class="oe_structure"/>-->
-                    <!--                    <div class="col-xs-8">-->
-                    <!--                        <tr>-->
-                    <!--                            <td width="100%">-->
-                    <!--                                <table>-->
-                    <!--                                    <tr>-->
-                    <!--                                        <td>-->
-                    <!--                                            <span>-->
-                    <!--                                                <strong>Mã Hồ Sơ Bệnh Án:</strong>-->
-                    <!--                                            </span>-->
-                    <!--                                        </td>-->
-                    <!--                                        <td colspan="6" class="text-center">-->
-                    <!--                                            <span t-field="o.name"/>-->
-                    <!--                                        </td>-->
-                    <!--                                    </tr>-->
-                    <!--                                    <tr>-->
-                    <!--                                        <td>-->
-                    <!--                                            <span>-->
-                    <!--                                                <strong>Tên Mã Bệnh Nhân:</strong>-->
-                    <!--                                            </span>-->
-                    <!--                                        </td>-->
-                    <!--                                        <td colspan="6" class="text-center">-->
-                    <!--                                            <span t-field="o.code_bn"/>-->
-                    <!--                                        </td>-->
-                    <!--                                    </tr>-->
-                    <!--                                    <tr>-->
-                    <!--                                        <td>-->
-                    <!--                                            <span>-->
-                    <!--                                                <strong>Tên Bệnh Nhân:</strong>-->
-                    <!--                                            </span>-->
-                    <!--                                        </td>-->
-                    <!--                                        <td colspan="6" class="text-center">-->
-                    <!--                                            <span t-field="o.patient_name"/>-->
-                    <!--                                        </td>-->
-                    <!--                                    </tr>-->
-                    <!--                                    <tr>-->
-                    <!--                                        <td>-->
-                    <!--                                            <span>-->
-                    <!--                                                <strong>Khoa Điều Trị:</strong>-->
-                    <!--                                            </span>-->
-                    <!--                                        </td>-->
-                    <!--                                        <td colspan="6" class="text-center">-->
-                    <!--                                            <span t-field="o.khoa"/>-->
-                    <!--                                        </td>-->
-                    <!--                                    </tr>-->
-                    <!--                                    <tr>-->
-                    <!--                                        <td>-->
-                    <!--                                            <span>-->
-                    <!--                                                <strong>Chuẩn Đoán:</strong>-->
-                    <!--                                            </span>-->
-                    <!--                                        </td>-->
-                    <!--                                        <td colspan="6" class="text-center">-->
-                    <!--                                            <span t-field="o.diagnostic"/>-->
-                    <!--                                        </td>-->
-                    <!--                                    </tr>-->
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <div class="col-xs-8">
+                            <tr>
+                                <td width="100%">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <strong>Mã Hồ Sơ Bệnh Án:</strong>
+                                                </span>
+                                            </td>
+                                            <td colspan="6" class="text-center">
+                                                <span t-field="o.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <strong>Tên Mã Bệnh Nhân:</strong>
+                                                </span>
+                                            </td>
+                                            <td colspan="6" class="text-center">
+                                                <span t-field="o.code_bn"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <strong>Tên Bệnh Nhân:</strong>
+                                                </span>
+                                            </td>
+                                            <td colspan="6" class="text-center">
+                                                <span t-field="o.patient_name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <strong>Khoa Điều Trị:</strong>
+                                                </span>
+                                            </td>
+                                            <td colspan="6" class="text-center">
+                                                <span t-field="o.khoa"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <strong>Chuẩn Đoán:</strong>
+                                                </span>
+                                            </td>
+                                            <td colspan="6" class="text-center">
+                                                <span t-field="o.diagnostic"/>
+                                            </td>
+                                        </tr>
 
-                    <!--                                    <tr>-->
-                    <!--                                        <td>-->
-                    <!--                                            <span>-->
-                    <!--                                                <strong>Hướng Điều Trị:</strong>-->
-                    <!--                                            </span>-->
-                    <!--                                        </td>-->
-                    <!--                                        <td colspan="6" class="text-center">-->
-                    <!--                                            <span t-field="o.treatment"/>-->
-                    <!--                                        </td>-->
-                    <!--                                    </tr>-->
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <strong>Hướng Điều Trị:</strong>
+                                                </span>
+                                            </td>
+                                            <td colspan="6" class="text-center">
+                                                <span t-field="o.treatment"/>
+                                            </td>
+                                        </tr>
 
-                    <!--                                    <tr>-->
-                    <!--                                        <td>-->
-                    <!--                                            <span>-->
-                    <!--                                                <strong>Ngày Khám:</strong>-->
-                    <!--                                            </span>-->
-                    <!--                                        </td>-->
-                    <!--                                        <td colspan="6" class="text-center">-->
-                    <!--                                            <span t-field="o.start_date_hospital"/>-->
-                    <!--                                        </td>-->
-                    <!--                                    </tr>-->
-                    <!--                                    <tr>-->
-                    <!--                                        <td>-->
-                    <!--                                            <span>-->
-                    <!--                                                <strong>Bác Sĩ:</strong>-->
-                    <!--                                            </span>-->
-                    <!--                                        </td>-->
-                    <!--                                        <td colspan="6" class="text-center">-->
-                    <!--                                            <span t-field="o.doctor"/>-->
-                    <!--                                        </td>-->
-                    <!--                                    </tr>-->
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <strong>Ngày Khám:</strong>
+                                                </span>
+                                            </td>
+                                            <td colspan="6" class="text-center">
+                                                <span t-field="o.start_date_hospital"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <strong>Bác Sĩ:</strong>
+                                                </span>
+                                            </td>
+                                            <td colspan="6" class="text-center">
+                                                <span t-field="o.doctor"/>
+                                            </td>
+                                        </tr>
 
-                    <!--                                </table>-->
-                    <!--                            </td>-->
-                    <!--                        </tr>-->
-                    <!--                    </div>-->
-                    <!--                </div>-->
-                    <!--                <br/>-->
-
-                    <!--                <t t-if="o.medicine_lines">-->
-                    <!--                    <span>Kê Đơn Thuốc</span>-->
-                    <!--                    <table class="table table-sm o_main_table" name="appointment">-->
-                    <!--                        <thead>-->
-                    <!--                            <tr>-->
-                    <!--                                <th name="thuoc" class="text-left">-->
-                    <!--                                    <span>Tên thuốc</span>-->
-                    <!--                                </th>-->
-                    <!--                                <th name="product_qty" class="text-left">-->
-                    <!--                                    <span>Số lượng</span>-->
-                    <!--                                </th>-->
-                    <!--                                <th name="tac_dung" class="text-left">-->
-                    <!--                                    <span>Tác Dụng</span>-->
-                    <!--                                </th>-->
-                    <!--                                <th name="ghichu" class="text-left">-->
-                    <!--                                    <span>Ghi Chú</span>-->
-                    <!--                                </th>-->
-                    <!--                            </tr>-->
-                    <!--                        </thead>-->
-                    <!--                        <t t-set="order_count" t-value="0"/>-->
-                    <!--                        <t t-foreach="o.medicine_lines" t-as="line">-->
-                    <!--                            <t t-set="order_count" t-value="order_count +1"/>-->
-                    <!--                            <tr>-->
-                    <!--                                <td>-->
-                    <!--                                    <span t-field="line.thuoc"/>-->
-                    <!--                                </td>-->
-                    <!--                                <td>-->
-                    <!--                                    <span t-field="line.product_qty"/>-->
-                    <!--                                </td>-->
-                    <!--                                <td>-->
-                    <!--                                    <span t-field="line.tac_dung"/>-->
-                    <!--                                </td>-->
-                    <!--                                <td>-->
-                    <!--                                    <span t-field="line.ghichu"/>-->
-                    <!--                                </td>-->
-                    <!--                            </tr>-->
-                    <!--                        </t>-->
-                    <!--                    </table>-->
-                    <!--                </t>-->
+                                    </table>
+                                </td>
+                            </tr>
+                        </div>
+                    </div>
+                    <br/>
+                    <t t-if="o.medicine_lines">
+                        <span>Kê Đơn Thuốc</span>
+                        <table class="table table-sm o_main_table" name="appointment">
+                            <thead>
+                                <tr>
+                                    <th name="thuoc" class="text-left">
+                                        <span>Tên thuốc</span>
+                                    </th>
+                                    <th name="product_qty" class="text-left">
+                                        <span>Số lượng</span>
+                                    </th>
+                                    <th name="tac_dung" class="text-left">
+                                        <span>Tác Dụng</span>
+                                    </th>
+                                    <th name="ghichu" class="text-left">
+                                        <span>Ghi Chú</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <t t-set="order_count" t-value="0"/>
+                            <t t-foreach="o.medicine_lines" t-as="line">
+                                <t t-set="order_count" t-value="order_count +1"/>
+                                <tr>
+                                    <td>
+                                        <span t-field="line.thuoc"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.product_qty"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.tac_dung"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.ghichu"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                    </t>
                 </t>
             </t>
         </t>
