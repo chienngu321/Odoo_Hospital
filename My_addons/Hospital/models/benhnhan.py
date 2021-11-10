@@ -25,13 +25,10 @@ class QLBN(models.Model):
         ('a', 'A'),
         ('b', 'B'),
         ('o', 'O'),
-        ('ab', 'AB'),
-        ('hiem', 'Hiếm')
+        ('ab', 'AB')
     ], string='Nhóm máu:', default='a')
     tgvaovien = fields.Date('Thời gian vào viện:', required=True)
-    lydo = fields.Char('Lý do vào viện:', required=False)
     tgravien = fields.Date('Thời gian ra viện:', required=False)
-    kham = fields.Char('Khám:', required=True)
     sotheBHYT = fields.Char('Số thẻ BHYT:', required=True)
     noicap = fields.Text('Nơi đăng ký thẻ:', required=False)
     tuyen = fields.Selection([
