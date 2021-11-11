@@ -19,9 +19,6 @@ class MedicalRecord(models.Model):
     # ], default='male')
     gender = fields.Selection([('male', 'Nam'),
                                ('female', 'Nữ')], string='Giới Tính', default='male')
-    job = fields.Char(string='Nghề Nghiệp', required=False, translate=True)
-    address = fields.Char(string='Địa Chỉ', required=False, translate=True)
-    workplace = fields.Char(string='Nơi Làm Việc', required=False, translate=True)
     object_bn = fields.Selection([
         ('dv', 'Dịch Vụ'),
         ('hn', 'Hộ Nghèo'),
