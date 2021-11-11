@@ -51,9 +51,6 @@
                             <field name="bdate"/>
                             <field name="patient_age"/>
                             <field name="gender"/>
-                            <field name="job"/>
-                            <field name="address"/>
-                            <field name="workplace"/>
                             <field name="object_bn"/>
                         </group>
                     </group>
