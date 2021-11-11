@@ -48,7 +48,7 @@ class QLBN(models.Model):
     bn_image = fields.Binary("Ảnh thẻ", attachment=True, help="Ảnh thẻ")
     name = fields.Char(string='Mã bệnh nhân:', required=True, copy=False, readonly=True,
                               default=lambda seft: _('Mã BN'))
-    benh_li = fields.Many2many('medical.record', string="Bệnh Lí:")
+    benh_li = fields.One2many('medical.record', 'code_bn', string="Bệnh Lí:")
 
     @api.model
     def create(self, values):
