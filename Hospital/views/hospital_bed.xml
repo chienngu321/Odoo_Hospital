@@ -6,29 +6,28 @@
             <field name="model">product.template</field>
             <field name="inherit_id" ref="product.product_template_only_form_view"/>
             <field name="arch" type="xml">
-               <xpath expr="//label[@for='name']" position="attributes">
+                <xpath expr="//label[@for='name']" position="attributes">
                     <attribute name="string">Tên giường bệnh</attribute>
-               </xpath>
-               <notebook>
-               <page string="Thông tin chi tiết giường bệnh" name="Detailed Tnformation" >
-                     <group name="ttctgb">
-                        <group>
-                            <field name="bn_image"/>
-                            <field name="ten"/>
-                            <field name="tuoi"/>
-                            <field name="gioitinh"/>
-                            <field name="chuandoan"/>
+                </xpath>
+                <notebook>
+                    <page string="Thông tin giường bệnh" name="Detailed Tnformation">
+                        <group name="ttctgb">
+                            <group>
+                                <field name="tg_nhapgiuong"/>
+                                <field name="th_sudung"/>
+                                <field name="tinh_trang"/>
+                            </group>
+                            <group>
+                                <field name="so_luong"/>
+                                <field name="tien"/>
+                                <field name="note"/>
+                            </group>
                         </group>
-                        <group>
-                            <field name="thoigian_nhapvien"/>
-                            <field name="songay_nhapvien"/>
-                            <field name="bacsi_phutrach"/>
-                            <field name="phongbenh"/>
-                            <field name="note"/>
-                        </group>
-                     </group>
-               </page>
-               </notebook>
+                    </page>
+                    <page name="nguoinam_information" string="Danh sách bệnh nhân">
+                        <field name="bed_inf"/>
+                    </page>
+                </notebook>
                 <xpath expr="//field[@name='sale_ok']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
@@ -41,10 +40,10 @@
                 <xpath expr="//label[@for='purchase_ok']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
-                 <xpath expr="//page[@name='sales']" position="attributes">
+                <xpath expr="//page[@name='sales']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
-                  <xpath expr="//page[@name='purchase']" position="attributes">
+                <xpath expr="//page[@name='purchase']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
                 <xpath expr="//page[@name='inventory']" position="attributes">
@@ -78,12 +77,12 @@
                     <field name="loai"/>
                 </field>
                 <field name="barcode" position="after">
+                    <field name="cn"/>
+                </field>
+                <field name="cn" position="after">
                     <field name="chucnang"/>
                 </field>
-                <field name="barcode" position="after">
-                    <field name="trangthai"/>
-                </field>
-                <field name="trangthai" position="after">
+                <field name="loai" position="after">
                     <field name="chatlieu"/>
                 </field>
                 <xpath expr="//group[@name='group_standard_price']" position="inside">
@@ -96,21 +95,24 @@
             </field>
         </record>
         <record id="hospital_bed_act" model="ir.actions.act_window">
-            <field name="name">HospitalBed</field>
+            <field name="name">Giường Bệnh</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">product.template</field>
             <field name="view_mode">tree,form,kanban,activity</field>
         </record>
         <!--        tao menu -->
-        <menuitem id="menu_hospital"
-                  name="Hospital"
+        <menuitem id="hospital_root"
+                  name="Bệnh Viện"
+                  sequence="10"/>
+        <!--        <menuitem id="menu_hospital"-->
+        <!--                  name="Hospital"-->
+        <!--                  action="hospital_bed_act"-->
+        <!--                  sequence="0"-->
+        <!--                  groups="base.group_user"/>-->
+        <menuitem id="hospital_bed"
+                  parent="hospital_root"
+                  name="Quản Lí Giường Bệnh"
                   action="hospital_bed_act"
-                  sequence="0"
-                  groups="base.group_user"/>
-        <menuitem id="menu_hospital_bed"
-                  parent="menu_hospital"
-                  name="HospitalBed"
-                  action="hospital_bed_act"
-                  sequence="1"/>
+                  sequence="10"/>
     </data>
 </odoo>

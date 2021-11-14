@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import datetime
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
@@ -8,62 +7,41 @@ class HospitalBed(models.Model):
     _inherit = "product.template"
 
     # add new fields
-    id_bed = fields.Char('Mã số giường', required=True)
+    id_bed = fields.Char(string='GB', required=True, copy=False, readonly=True,
+                         default=lambda seft: _('New'))
+    cn = fields.Integer('Chức năng', required=False)
     chucnang = fields.Selection([
         ('capcuu', 'Cấp cứu'),
         ('benh', 'Bệnh')
-    ], string='Chức năng', required=True, default='benh')
-    trangthai = fields.Selection([
-        ('trong', 'Trống'),
-        ('day', 'Đầy')
-    ], string='Trạng thái', required=True, default='trong')
+    ], string='Loại Hình', required=True, default='benh')
+    so_luong = fields.Integer('Số Lượng', required=False)
+    chieudai = fields.Char('Chiều dài', required=False)
+    chieurong = fields.Char('Chiều rộng', required=False)
+    chieucao = fields.Char('Chiều cao', required=False)
+    chatlieu = fields.Char('Chất liệu', required=False)
+    trongluong = fields.Char('Trọng lượng giường', required=False)
+    taitrong = fields.Char('Tải trọng tối đa', required=False)
+    tinh_trang = fields.Selection([
+        ('new', 'Mới'),
+        ('old', 'Cũ')
+    ], string='Tình trạng giường', default='new')
+    th_sudung = fields.Selection([
+        ('a', '15 năm - 18 năm'),
+        ('b', '18 năm - 20 năm'),
+        ('c', '20 năm - 25 năm')
+    ], string='Thời hạn sử dụng', default='a')
+    tg_nhapgiuong = fields.Date(string='Thời gian nhập', help="Nhập thời gian bắt đầu nhập viện.")
+    note = fields.Text('Ghi chú:', required=False)
     loai = fields.Selection([
         ('coban', 'Giường y tế cơ bản'),
         ('dachucnang', 'Giường đa chức năng')
     ], string='Loại giường', default='coban', required=True)
-    chieudai = fields.Char('Chiều dài', required=True)
-    chieurong = fields.Char('Chiều rộng', required=True)
-    chieucao = fields.Char('Chiều cao', required=True)
-    chatlieu = fields.Char('Chất liệu', required=True)
-    trongluong = fields.Char('Trọng lượng giường', required=True)
-    taitrong = fields.Char('Tải trọng tối đa', required=True)
-    bn_image = fields.Binary("Ảnh bệnh nhân", attachment=True, help="Ảnh bệnh nhân")
-    ten = fields.Char('Họ và tên bệnh nhân', required=True)
-    tuoi = fields.Integer('Tuổi', required=True)
-    gioitinh = fields.Selection([
-        ('nam', 'Nam'),
-        ('nu', 'Nữ')
-    ], string='Giới tính', required=True, default='nam')
-    chuandoan = fields.Char('Chuẩn đoán bệnh', required=True)
-    thoigian_nhapvien = fields.Date(string='Thời gian nhập viện', help="Nhập thời gian bắt đầu nhập viện.")
-    songay_nhapvien = fields.Char(string='Số ngày nhập viện', compute="_get_date")
-    bacsi_phutrach = fields.Char('Bác sĩ phụ trách', required=True)
-    phongbenh = fields.Char('Tên phòng', required=True)
-    note = fields.Text('Ghi chú:', required=True)
-
-    @api.constrains('id_bed')
-    def _check_id_bed(self):
-        exists = self.env['product.template'].search(
-            [('id_bed', '=', self.id_bed), ('id', '!=', self.id)])
-        if exists:
-            raise ValidationError(_('Mã giường  ' + self.id_bed + ' đã tồn tại.'))
-
-    def copy(self, default={}):
-        if self.id_bed == False:
-            default['id_bed'] = str(self.id) + " (Bản sao)"
-        else:
-            default['id_bed'] = self.id_bed + " (Bản sao)"
-
-        res = super(HospitalBed, self).copy(default=default)
-        return res
+    tien = fields.Char('Giá tiền', required=False)
+    bed_inf = fields.One2many('medical.record', 'bed_bn')
 
     @api.model
-    def _get_date(self):
-        today_date = datetime.date.today()
-        for bed in self:
-            if bed.thoigian_nhapvien:
-                thoigian_nhapvien = fields.Datetime.to_datetime(bed.thoigian_nhapvien).date()
-                dem = str(int((today_date - thoigian_nhapvien).days))
-                bed.songay_nhapvien = dem
-            else:
-                bed.songay_nhapvien = ""
+    def create(self, vals):
+        if vals.get('id_bed', ('New')) == ('New'):
+            vals['id_bed'] = self.env['ir.sequence'].next_by_code('product.template') or _('New')
+        res = super(HospitalBed, self).create(vals)
+        return res
